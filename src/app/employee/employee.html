@@ -1,0 +1,27 @@
+<div class="container shadow rounded p-3">
+    <div class="row">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary"><i class="ri-add-line"></i>Add Tailor</button>
+        </div>
+        <div class="">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        @for (item of tableHeaders; track $index) {
+                            <th>{{item.label}}</th>
+                        }
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="employeeList.length>0">
+                        <td></td>
+                    </tr>
+                    
+                        <td class="text-danger" *ngIf="employeeList.length==0">No Data to Display!</td>
+            
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
