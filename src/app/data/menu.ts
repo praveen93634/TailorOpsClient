@@ -5,7 +5,7 @@ export const items = [
       label: 'Dashboard',
     },
     {
-      routeLink: 'user',
+      routeLink: 'employee',
       icon: 'ri-id-card-line',
       label: 'Tailor',
     },
