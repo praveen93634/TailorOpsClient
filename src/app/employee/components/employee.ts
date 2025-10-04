@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { employeeService } from '../create-employee/service/employee';
+import { employeeService } from '../../create-employee/service/employee';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -29,7 +29,10 @@ constructor(private employeeservice:employeeService){}
 
     getAllEmployee(){
         this.employeeservice.getAllEmployee().subscribe((res:any)=>{
+          this.employeeList=res;
           console.log(res)
+        },(err)=>{
+          console.log(err.message)
         })
     }
 

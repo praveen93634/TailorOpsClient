@@ -1,46 +1,63 @@
 <div class="container shadow rounded p-4">
-<div class="row">
-    <div class="mb-4">
-        <span>Create Employee</span>
+    <div class="row">
+        <div class="mb-4">
+            <span>Create Employee</span>
+        </div>
+        <form #employeeform="ngForm" (ngSubmit)="employeeform.valid && onsubmit()">
+            <div class="row">
+                <div class="col-lg-6 mb-3">
+                    <label class="label mb-2">Name<span class="text-danger">*</span></label>
+                    <input class="form-control" [ngClass]="{'is-invalid':employeeform.submitted && Empname.invalid}"
+                        minlength="3" placeholder="Enter Employee Name (eg.praveen)" name="EmpName"
+                        [(ngModel)]="employee.name" #Empname="ngModel" required>
+                    <span *ngIf="employeeform.submitted && Empname.invalid">
+                        <small *ngIf="Empname.errors?.['required']" class="text-danger">This Feild is Required</small>
+                        <small *ngIf="Empname.errors?.['minlength']" class="text-danger">Enter Atleast 3
+                            Character</small>
+                    </span>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label class="mb-2">Role<span class="text-danger">*</span></label>
+                    <input class="form-control" placeholder="Enter role (eg.Tailor)"
+                        [ngClass]="{'is-invalid':employeeform.submitted && role.invalid}" minlength="3" name="Role"
+                        [(ngModel)]="employee.role" #role="ngModel" required>
+                    <span *ngIf="employeeform.submitted && role.invalid">
+                        <small *ngIf="role.errors?.['required']" class="text-danger">This Feild is Required</small>
+                        <small *ngIf="role.errors?.['minlength']" class="text-danger">Enter Atleast 3 Character</small>
+                    </span>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label class="label mb-2">Email<span class="text-danger">*</span></label>
+                    <input class="form-control" placeholder="Enter Email (ef.praveen@gmail.com)"
+                        [ngClass]="{'is-invalid':employeeform.submitted && email.invalid}"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="Email" [(ngModel)]="employee.Email"
+                        #email="ngModel" required>
+                    <span *ngIf="employeeform.submitted && email.invalid">
+                        <small *ngIf="email.errors?.['required']" class="text-danger">This Feild is Required</small>
+                        <small *ngIf="email.errors?.['pattern']" class="text-danger">Enter Valid Email</small>
+                    </span>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label class="label mb-2">Password<span class="text-danger">*</span></label>
+                    <div class="position-relative">
+                        <input class="form-control" [type]="showPassword ? 'text' : 'password'"
+                            placeholder="Enter your Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            [ngClass]="{'is-invalid':employeeform.submitted && password.invalid}" name="password"
+                            [(ngModel)]="employee.passWord" #password="ngModel" required>
+                        <i class="ri-eye-line  position-absolute top-50 end-0 translate-middle-y me-3 text-muted"
+                            [ngClass]="{ 'ri-eye-off-line': showPassword }" style="cursor: pointer"
+                            (click)="togglePassword()"></i>
+                    </div>
+                    <span *ngIf="employeeform.submitted && password.invalid">
+                        <small *ngIf="password.errors?.['required']" class="text-danger">This Feild is Required</small>
+                        <small *ngIf="password.errors?.['pattern']" class="text-danger">Enter Valid Password</small>
+                    </span>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button routerLink="/employee" type="button" class="btn btn-danger light me-1">Cancel</button>
+                    <button type="submit" class="btn btn-primary ms-2">Submit</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <form #employeeform="ngForm" (ngSubmit)="employeeform.valid && onsubmit()">
-        <div class="col mb-3">
-            <label class="label mb-2">Name<span class="text-danger">*</span></label>
-            <input class="form-control" [ngClass]="{'is-invalid':employeeform.submitted && Empname.invalid}" minlength="3" placeholder="Enter Employee Name (eg.praveen)" name="EmpName" [(ngModel)]="employee.name" #Empname="ngModel" required>
-            <span *ngIf="employeeform.submitted && Empname.invalid">
-                <small *ngIf="Empname.errors?.['required']" class="text-danger">This Feild is Required</small>
-                <small *ngIf="Empname.errors?.['minlength']" class="text-danger">Enter Atleast 3 Character</small>
-            </span>
-        </div>
-        <div class="col mb-3">
-            <label class="mb-2">Role<span class="text-danger">*</span></label>
-            <input class="form-control" placeholder="Enter role (eg.Tailor)" [ngClass]="{'is-invalid':employeeform.submitted && role.invalid}"  minlength="3" name="Role" [(ngModel)]="employee.role" #role="ngModel" required>
-            <span *ngIf="employeeform.submitted && role.invalid">
-                <small *ngIf="role.errors?.['required']" class="text-danger">This Feild is Required</small>
-                <small *ngIf="role.errors?.['minlength']" class="text-danger">Enter Atleast 3 Character</small>
-            </span>
-        </div>
-         <div class="col mb-3">
-            <label class="label mb-2">Email<span class="text-danger">*</span></label>
-            <input class="form-control" placeholder="Enter Email (ef.praveen@gmail.com)" [ngClass]="{'is-invalid':employeeform.submitted && email.invalid}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="Email" [(ngModel)]="employee.Email" #email="ngModel" required>
-            <span *ngIf="employeeform.submitted && email.invalid">
-                <small *ngIf="email.errors?.['required']" class="text-danger">This Feild is Required</small>
-                <small *ngIf="email.errors?.['pattern']" class="text-danger">Enter Valid Email</small>
-            </span>
-        </div>
-         <div class="col mb-3">
-            <label class="label mb-2">Password<span class="text-danger">*</span></label>
-            <input class="form-control" placeholder="Enter your Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" [ngClass]="{'is-invalid':employeeform.submitted && password.invalid}"  name="password" [(ngModel)]="employee.passWord" #password="ngModel" required>
-            <span *ngIf="employeeform.submitted && password.invalid">
-                <small *ngIf="password.errors?.['required']" class="text-danger">This Feild is Required</small>
-                <small *ngIf="password.errors?.['pattern']" class="text-danger">Enter Valid Password</small>
-            </span>
-        </div>
-        <div class="d-flex justify-content-end">
-            <button routerLink="employee" class="btn btn-danger light me-1">Cancel</button>
-            <button type="submit" class="btn btn-primary ms-2">Submit</button>
-            
-        </div>
-    </form>
-</div>
 </div>

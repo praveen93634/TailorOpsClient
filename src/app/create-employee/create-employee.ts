@@ -19,17 +19,22 @@ export class CreateEmployee implements OnInit{
   ngOnInit(): void {
       
   }
-
+  constructor(private employeeService:employeeService,private router:Router){}
+  showPassword?:Boolean
   employee: Employee=new Employee();
-  constructor(private employeeservice:employeeService,private router:Router){ }
-   onsubmit(){
-    this.employeeservice.createuser(this.employee).subscribe((x:any)=>{
-      console.log(x)
-      this.router.navigate(['/employee']);
-    },(error:any)=>{
-      console.log(error)
-    })    
-   }
 
+   onsubmit(){
+      this.employeeService.creatEmployee(this.employee).subscribe((result:any)=>{
+        console.log(result); 
+        this.router.navigateByUrl('/employee')
+      },(error:any)=>{
+        console.log(error);
+        
+      })
+   }
+   togglePassword(){
+      this.showPassword = !this.showPassword;
+      this.employee.passWord
+   }
 
 }

@@ -14,12 +14,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngIf="employeeList.length>0">
-                        <td></td>
-                    </tr>
                     
+                      @for (item of employeeList; track $index) {
+                       <tr>
+                        <td>{{item.name}}</td>
+                        <td>{{item.role}}</td>
+                       </tr> 
+                      }
+                  
                         <td class="text-danger" *ngIf="employeeList.length==0">No Data to Display!</td>
-            
                 </tbody>
             </table>
         </div>
